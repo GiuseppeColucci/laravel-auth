@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\book;
+use App\Http\Controllers\Controller;//serve per indicare alla classe bookcontroller cosa deve estendere(controller)
+//se spostiamo la cartella va inserita
+use App\Book;
 
 class BookController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +17,14 @@ class BookController extends Controller
      */
     public function index()
     {
+        // $books= Book :: all();
+        // return view('public.index', compact('books'));
         return redirect()->route('public-index');
+        //CON return redirect()->route('public-index'); STIAMO DICENDO:RINDIRIZZAMI LA ROTTA DELL INDEX NON NELLA PARTE PRIVATA MA PUBLICA
     }
-
+/**
+ * DA QUI IN GIU BISOGNA ESSERE LOGGATI PER ACCEDERE ALLA VISIONE!!
+ */
     /**
      * Show the form for creating a new resource.
      *
@@ -44,9 +52,10 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Book $books)
     {
-        //
+        return view('public.show', compact('books'));
+
     }
 
     /**
